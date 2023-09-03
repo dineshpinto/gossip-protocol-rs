@@ -1,11 +1,11 @@
 [tool.poetry]
-name = "gossip-protocol-rs"
+name = "gossip-protocol"
 version = "0.1.0"
 description = ""
 authors = ["dineshpinto <annual.fallout_0z@icloud.com>"]
 license = "MIT"
 readme = "README.md"
-packages = [{include = "gossip_protocol_rs"}]
+packages = [{ include = "gossip_protocol" }]
 
 [tool.poetry.dependencies]
 python = "^3.11"

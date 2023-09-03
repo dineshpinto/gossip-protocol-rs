@@ -18,7 +18,7 @@ cargo run --release
 ```bash
 cd gossip-protocol-rs
 poetry install --with dev
-poetry run maturin develop
+poetry run maturin develop --release
 ```
 
 ```ipython
@@ -26,3 +26,11 @@ poetry run maturin develop
 >>> res = run_gossip_protocol(num_honest_sample=5, num_adversarial_sample=4,
     num_non_sample=1000, num_peers=6, cycles=200)
 ```
+
+## Simulation
+
+See [dineshpinto/synchronous-gossip-protocol](https://github.com/dineshpinto/synchronous-gossip-protocol) for a pure
+Python implementation, along with additional theoretical details.
+
+![Results](output/convergence_heatmap_and_overall.png)
+![Results](output/node_state_heatmap.png)
