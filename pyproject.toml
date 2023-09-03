@@ -10,6 +10,8 @@ packages = [{include = "gossip_protocol_rs"}]
 [tool.poetry.dependencies]
 python = "^3.11"
 maturin = "^1.2.3"
+jupyterlab = "^4.0.5"
+seaborn = "^0.12.2"
 
 
 [build-system]
