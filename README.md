@@ -4,6 +4,8 @@ Rust implementation of a synchronous gossip protocol.
 
 ## Build Rust library
 
+Remove `crate-type = ["cdylib"]` from `Cargo.toml` to build as a static library.
+
 ```bash
 git clone https://github.com/dineshpinto/gossip-protocol-rs.git
 cd gossip-protocol-rs

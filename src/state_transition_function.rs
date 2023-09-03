@@ -52,8 +52,8 @@ pub fn evolve_state(
         }
 
         non_sample_broadcasts.push(average(&_non_sample_broadcasts));
-        println!("Cycle {}, Average value broadcast: {:?}",
-                 cycle, non_sample_broadcasts.last().unwrap());
+        // println!("Cycle {}, Average value broadcast: {:?}",
+        //          cycle, non_sample_broadcasts.last().unwrap());
     }
     non_sample_broadcasts
 }
