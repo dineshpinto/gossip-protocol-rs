@@ -13,7 +13,7 @@ fn average(numbers: &[i32]) -> f32 {
 pub fn evolve_state(
     nodes: &mut HashMap<usize, Node>,
     cycles: usize,
-) -> Vec<f32> {
+) -> Vec<i32> {
     let mut non_sample_broadcasts = Vec::new();
     // Run simulation
     for cycle in 0..cycles {
@@ -38,7 +38,7 @@ pub fn evolve_state(
                 match msg {
                     Message::Honest => { _non_sample_broadcasts.push(1) }
                     Message::Adversarial => { _non_sample_broadcasts.push(0) }
-                    Message::Default => {}
+                    Message::Default => { _non_sample_broadcasts.push(-1) }
                 }
             }
         }
@@ -51,7 +51,7 @@ pub fn evolve_state(
                 .update(messages);
         }
 
-        non_sample_broadcasts.push(average(&_non_sample_broadcasts));
+        non_sample_broadcasts.append(&mut _non_sample_broadcasts);
         // println!("Cycle {}, Average value broadcast: {:?}",
         //          cycle, non_sample_broadcasts.last().unwrap());
     }

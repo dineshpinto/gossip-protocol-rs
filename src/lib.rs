@@ -12,7 +12,7 @@ pub fn gossip_protocol(
     num_non_sample: usize,
     num_peers: usize,
     cycles: usize,
-) -> Vec<f32> {
+) -> Vec<i32> {
     // Create nodes
     let mut nodes = create_nodes(
         num_honest_sample,
@@ -34,7 +34,7 @@ pub fn run_gossip_protocol(
     num_non_sample: usize,
     num_peers: usize,
     cycles: usize,
-) -> Vec<f32> {
+) -> Vec<i32> {
     // Create nodes
     let mut nodes = create_nodes(
         num_honest_sample,
