@@ -18,10 +18,10 @@ fn run_gossip_protocol(
         num_non_sample,
     );
 
-    // Connect all nodes together
+    // Connect nodes together
     connect_nodes_to_random_peers(&mut nodes, num_peers);
 
-    // Run gossip protocol simulation
+    // Evolve state of the network
     evolve_state(&mut nodes, cycles)
 }
 

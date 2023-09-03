@@ -59,9 +59,9 @@ pub(crate) fn evolve_state(
                 .update(messages);
         }
 
-        println!("Cycle {}, Average value broadcast: {}",
-                 cycle, average(&_non_sample_broadcasts));
-        non_sample_broadcasts.push(average(&_non_sample_broadcasts) as f32);
+        non_sample_broadcasts.push(average(&_non_sample_broadcasts));
+        println!("Cycle {}, Average value broadcast: {:?}",
+                 cycle, non_sample_broadcasts.last().unwrap());
     }
     non_sample_broadcasts
 }
