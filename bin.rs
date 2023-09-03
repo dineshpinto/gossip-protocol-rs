@@ -12,7 +12,7 @@ fn main() {
     let cycles = 200;
 
     // Run gossip protocol simulation
-    let _ = gossip_protocol_rs::run_gossip_protocol(
+    let _ = gossip_protocol_rs::gossip_protocol(
         num_honest_sample,
         num_adversarial_sample,
         num_non_sample,
