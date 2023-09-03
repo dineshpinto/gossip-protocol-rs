@@ -1,6 +1,8 @@
 use std::cmp::Ordering;
 use std::collections::HashMap;
 
+use rand::seq::SliceRandom;
+
 #[derive(PartialEq, Debug, Clone)]
 pub(crate) enum Message {
     Honest,
@@ -79,11 +81,20 @@ pub(crate) fn create_nodes(
     nodes
 }
 
-pub(crate) fn connect_nodes_to_peers(nodes: &mut HashMap<usize, Node>) {
+pub(crate) fn connect_nodes_to_random_peers(
+    nodes: &mut HashMap<usize, Node>,
+    num_peers: usize,
+) {
+    let mut rng = &mut rand::thread_rng();
+
     let total_nodes = nodes.len();
     for (node_id, node) in nodes {
-        let mut peers = (0..total_nodes).collect::<Vec<usize>>();
-        peers.remove(*node_id);
+        let mut _peers = (0..total_nodes).collect::<Vec<usize>>();
+        _peers.remove(*node_id);
+        let peers: Vec<usize> = _peers
+            .choose_multiple(&mut rng, num_peers)
+            .cloned()
+            .collect();
         node.add_peers(peers);
     }
 }
