@@ -17,7 +17,7 @@ cargo run --release
 
 ```bash
 cd gossip-protocol-rs
-poetry install
+poetry install --with dev
 poetry run maturin develop
 ```
 
