@@ -8,6 +8,7 @@ edition = "2021"
 [lib]
 name = "gossip_protocol_rs"
 path = "src/lib.rs"
+crate-type = ["cdylib"]
 
 [[bin]]
 name = "gossip_protocol_rs"

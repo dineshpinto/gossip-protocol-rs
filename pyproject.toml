@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "gossip-protocol-rs"
+version = "0.1.0"
+description = ""
+authors = ["dineshpinto <annual.fallout_0z@icloud.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "gossip_protocol_rs"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+maturin = "^1.2.3"
+
+
+[build-system]
+requires = ["maturin>=1.0,<2.0"]
+build-backend = "maturin"
+
+[tool.maturin]
+features = ["pyo3/extension-module"]
