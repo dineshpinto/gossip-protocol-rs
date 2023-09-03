@@ -10,15 +10,7 @@ fn average(numbers: &[i32]) -> f32 {
 /// # Arguments
 /// * `nodes` - A list of nodes
 /// * `cycles` - The number of cycles to run the simulation
-/// # Example
-/// ```
-/// use node::{connect_nodes_to_random_peers, create_nodes};
-/// use state_transition_function::evolve_state;
-/// let mut nodes = create_nodes(5, 4, 1000);
-/// connect_nodes_to_random_peers(&mut nodes, 6);
-/// evolve_state(&mut nodes, 100);
-/// ```
-pub(crate) fn evolve_state(
+pub fn evolve_state(
     nodes: &mut HashMap<usize, Node>,
     cycles: usize,
 ) -> Vec<f32> {

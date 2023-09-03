@@ -4,11 +4,6 @@ use std::collections::HashMap;
 use rand::seq::SliceRandom;
 
 /// A message that can be broadcast by a node
-/// # Example
-/// ```
-/// use node::Message;
-/// let message = Message::Honest;
-/// ```
 #[derive(PartialEq, Debug, Clone)]
 pub(crate) enum Message {
     Honest,
@@ -17,7 +12,7 @@ pub(crate) enum Message {
 }
 
 #[derive(PartialEq, Debug, Clone)]
-pub(crate) struct Node {
+pub struct Node {
     node_id: usize,
     messages: Vec<Message>,
     pub(crate) initial_message: Message,
@@ -31,12 +26,6 @@ impl Node {
     ///
     /// * `node_id` - A unique integer identifier for the node
     /// * `initial_message` - The initial message the node will broadcast
-    ///
-    /// # Example
-    /// ```
-    /// use node::{Message, Node};
-    /// let node = Node::new(0, Message::Honest);
-    /// ```
     pub(crate) fn new(node_id: usize, initial_message: Message) -> Node {
         Node {
             node_id,
@@ -49,12 +38,6 @@ impl Node {
     /// Adds a list of peers to the node
     /// # Arguments
     /// * `peer_list` - A list of `node_ids corresponding to the peers of the node
-    /// # Example
-    /// ```
-    /// use node::Node;
-    /// let mut node = Node::new(0, Message::Honest);
-    /// node.add_peers(vec![1, 2, 3]);
-    /// ```
     pub(crate) fn add_peers(&mut self, peer_list: Vec<usize>) {
         self.peers = peer_list;
     }
@@ -63,12 +46,6 @@ impl Node {
     /// the node has received.
     /// # Arguments
     /// * `messages` - A list of messages to update the node with
-    /// # Example
-    /// ```
-    /// use node::{Message, Node};
-    /// let mut node = Node::new(0, Message::Honest);
-    /// node.update(&mut vec![Message::Honest, Message::Adversarial]);
-    /// ```
     pub(crate) fn update(&mut self, messages: &mut Vec<Message>) {
         if self.initial_message != Message::Default {} else {
             self.messages.append(messages);
@@ -78,12 +55,6 @@ impl Node {
     /// Returns the message the node will broadcast. If the node has an initial message, it will
     /// return that message. Otherwise, it will return the majority message from the messages it
     /// has received from its peers.
-    /// # Example
-    /// ```
-    /// use node::{Message, Node};
-    /// let node = Node::new(0, Message::Honest);
-    /// let message = node.broadcast();
-    /// ```
     pub(crate) fn broadcast(&self) -> Message {
         return if self.initial_message != Message::Default {
             self.initial_message.clone()
@@ -112,12 +83,7 @@ impl Node {
 /// * `num_honest_sample` - The number of honest nodes in the sample
 /// * `num_adversarial_sample` - The number of adversarial nodes in the sample
 /// * `num_non_sample` - The number of non-sample nodes
-/// # Example
-/// ```
-/// use node::create_nodes;
-/// let nodes = create_nodes(5, 4, 1000);
-/// ```
-pub(crate) fn create_nodes(
+pub fn create_nodes(
     num_honest_sample: usize,
     num_adversarial_sample: usize,
     num_non_sample: usize,
@@ -141,13 +107,7 @@ pub(crate) fn create_nodes(
 /// # Arguments
 /// * `nodes` - A list of nodes to connect
 /// * `num_peers` - The number of peers each node connects to
-/// # Example
-/// ```
-/// use node::{connect_nodes_to_random_peers, create_nodes};
-/// let mut nodes = create_nodes(5, 4, 1000);
-/// connect_nodes_to_random_peers(&mut nodes, 6);
-/// ```
-pub(crate) fn connect_nodes_to_random_peers(
+pub fn connect_nodes_to_random_peers(
     nodes: &mut HashMap<usize, Node>,
     num_peers: usize,
 ) {

@@ -1,11 +1,18 @@
 [package]
-name = "synchronous_gossip_protocol"
+name = "gossip-protocol-rs"
 authors = ["Dinesh Pinto <annual.fallout_0z@icloud.com>"]
 license = "MIT"
 version = "0.1.0"
 edition = "2021"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[lib]
+name = "gossip_protocol_rs"
+path = "src/lib.rs"
+
+[[bin]]
+name = "gossip_protocol_rs"
+path = "bin.rs"
 
 [dependencies]
 rand = "0.8.5"
+pyo3 = { version = "0.19.2", features = ["extension-module"] }
