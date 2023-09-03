@@ -54,3 +54,27 @@ fn gossip_protocol_rs(_py: Python<'_>, m: &PyModule) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(run_gossip_protocol, m)?)?;
     Ok(())
 }
+
+// #[cfg(test)]
+// mod tests {
+//     use super::*;
+//     use test::Bencher;
+//
+//     #[bench]
+//     fn bench_create_nodes(b: &mut Bencher) {
+//         b.iter(|| create_nodes(4, 4, 10000));
+//     }
+//
+//     #[bench]
+//     fn bench_connect_nodes(b: &mut Bencher) {
+//         let mut nodes =  create_nodes(4, 4, 10000);
+//         b.iter(|| connect_nodes_to_random_peers(&mut nodes, 6));
+//     }
+//
+//     #[bench]
+//     fn bench_evolve_nodes(b: &mut Bencher) {
+//         let mut nodes =  create_nodes(4, 4, 10000);
+//         connect_nodes_to_random_peers(&mut nodes, 6);
+//         b.iter(|| evolve_state(&mut nodes, 10));
+//     }
+// }

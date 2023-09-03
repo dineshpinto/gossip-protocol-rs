@@ -16,4 +16,4 @@ path = "bin.rs"
 
 [dependencies]
 rand = "0.8.5"
-pyo3 = { version = "0.19.2", features = ["extension-module"] }
+pyo3 = { version = "0.19.2", features = ["abi3-py311"] }
