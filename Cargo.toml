@@ -8,7 +8,7 @@ edition = "2021"
 [lib]
 name = "gossip_protocol_rs"
 path = "src/lib.rs"
-crate-type = ["cdylib"]
+
 
 [[bin]]
 name = "gossip_protocol_rs"
@@ -17,3 +17,9 @@ path = "bin.rs"
 [dependencies]
 rand = "0.8.5"
 pyo3 = { version = "0.19.2", features = ["abi3-py311"] }
+criterion = { version = "0.5.1", features = ["html_reports"] }
+counter = "0.5.7"
+
+[[bench]]
+name = "benchmarks"
+harness = false
