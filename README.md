@@ -5,26 +5,29 @@ Rust implementation of a synchronous gossip protocol.
 ## Build Rust library
 
 ```bash
-git clone https://github.com/dineshpinto/gossip-protocol-rs.git
-cd gossip-protocol-rs
 cargo build --release
 cargo run --release
 ```
 
-## Build Python bindings
+## Build Python bindings (optional)
 
 Add `crate-type = ["cdylib"]` under `[lib]` to `Cargo.toml` to build as a dynamic library.
 
 ```bash
-cd gossip-protocol-rs
 poetry install --with dev
-poetry run maturin develop --release
+poetry run maturin build --release
+```
+
+This will build the Python bindings and place them in `target/wheels` . To install the wheels
+
+```bash
+poetry add target/wheels/<name-of-wheel>.whl
 ```
 
 ```ipython
->>> from gossip_protocol_rs import run_gossip_protocol
->>> res = run_gossip_protocol(num_honest_sample=5, num_adversarial_sample=4,
-    num_non_sample=1000, num_peers=6, cycles=200)
+>>> from gossip_protocol_rs import pyrun_gossip_protocol
+>>> res = pyrun_gossip_protocol(num_honest_sample=6, num_adversarial_sample=4,
+    num_non_sample=10000, num_peers=6, cycles=100)
 ```
 
 ## Simulation
@@ -44,6 +47,6 @@ Uses `criterion` to benchmark the library.
 cargo bench
 ```
 
-![connect_nodes_to_random_peers_pdf](output/benchmark_connect_nodes_to_random_peers_pdf.svg)
 ![create_nodes_pdf](output/benchmark_create_nodes_pdf.svg)
+![connect_nodes_to_random_peers_pdf](output/benchmark_connect_nodes_to_random_peers_pdf.svg)
 ![evolve_state_pdf](output/benchmark_evolve_state_pdf.svg)
