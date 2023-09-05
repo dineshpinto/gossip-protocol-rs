@@ -10,7 +10,7 @@ fn criterion_benchmark(c: &mut Criterion) {
     let num_peers = 3;
     let cycles = 10;
 
-    // Create nodes
+    // Create nodes benchmark
     c.bench_function(
         "create_nodes",
         |b| b.iter(||
@@ -22,6 +22,7 @@ fn criterion_benchmark(c: &mut Criterion) {
         ),
     );
 
+    // Connect nodes benchmark
     let mut nodes = create_nodes(
         num_honest_sample,
         num_adversarial_sample,
@@ -37,6 +38,14 @@ fn criterion_benchmark(c: &mut Criterion) {
             )
         ),
     );
+
+    // Evolve state benchmark
+    let mut nodes = create_nodes(
+        num_honest_sample,
+        num_adversarial_sample,
+        num_non_sample,
+    );
+    connect_nodes_to_random_peers(&mut nodes, num_peers);
 
     c.bench_function(
         "evolve_state",

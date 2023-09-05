@@ -29,8 +29,21 @@ poetry run maturin develop --release
 
 ## Simulation
 
-See [dineshpinto/synchronous-gossip-protocol](https://github.com/dineshpinto/synchronous-gossip-protocol) for a pure
-Python implementation, along with additional theoretical details.
-
 ![Results](output/convergence_heatmap_and_overall.png)
 ![Results](output/node_state_heatmap.png)
+
+See [dineshpinto/synchronous-gossip-protocol](https://github.com/dineshpinto/synchronous-gossip-protocol) for a pure
+Python implementation, along with additional
+theoretical details.
+
+## Benchmark
+
+Uses `criterion` to benchmark the library.
+
+```bash
+cargo bench
+```
+
+![connect_nodes_to_random_peers_pdf](benches/connect_nodes_to_random_peers_pdf.svg)
+![create_nodes_pdf](benches/create_nodes_pdf.svg)
+![evolve_state_pdf](benches/evolve_state_pdf.svg)
