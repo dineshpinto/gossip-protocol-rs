@@ -7,8 +7,8 @@ use rand::seq::SliceRandom;
 #[derive(PartialEq, Debug, Clone, Eq, Hash, Ord, PartialOrd, Copy)]
 pub enum Message {
     Honest = 1,
-    Adversarial = 0,
-    Default = -1,
+    Adversarial = -1,
+    Default = 0,
 }
 
 #[derive(PartialEq, Debug, Clone)]

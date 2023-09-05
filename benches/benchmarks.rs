@@ -1,5 +1,6 @@
 use criterion::{black_box, Criterion, criterion_group, criterion_main};
 
+use gossip_protocol_rs::run_gossip_protocol;
 use gossip_protocol_rs::node::{connect_nodes_to_random_peers, create_nodes};
 use gossip_protocol_rs::state_transition_function::evolve_state;
 
@@ -52,6 +53,21 @@ fn criterion_benchmark(c: &mut Criterion) {
         |b| b.iter(||
             evolve_state(
                 black_box(&mut nodes),
+                black_box(cycles),
+                black_box(num_peers),
+                black_box(false),
+            )
+        ),
+    );
+
+    c.bench_function(
+        "run_gossip_protocol",
+        |b| b.iter(||
+            run_gossip_protocol(
+                black_box(num_honest_sample),
+                black_box(num_adversarial_sample),
+                black_box(num_non_sample),
+                black_box(num_peers),
                 black_box(cycles),
                 black_box(false),
             )
