@@ -46,9 +46,9 @@ impl Node {
     /// the node has received.
     /// # Arguments
     /// * `messages` - A list of messages to update the node with
-    pub fn update(&mut self, iter: Vec<Message>) {
+    pub fn update(&mut self, messages: Vec<Message>) {
         if self.initial_message != Message::Default {} else {
-            self.msg_counter.update(iter);
+            self.msg_counter.update(messages);
         }
     }
 
@@ -62,7 +62,7 @@ impl Node {
             self.msg_counter
                 .most_common_ordered()
                 .first()
-                .unwrap_or(&(Message::Default, 0))
+                .unwrap_or(&(self.initial_message, 0))
                 .0
         };
     }

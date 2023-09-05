@@ -1,15 +1,17 @@
 fn main() {
     // Parameters
     // Number of honest nodes in sample
-    let num_honest_sample = 5;
+    let num_honest_sample = 6;
     // Number of adversarial nodes in sample
     let num_adversarial_sample = 4;
     // Number of non-sample nodes
-    let num_non_sample = 10000;
+    let num_non_sample = 1000;
     // Number of peers each node connects to
-    let num_peers = 4;
+    let num_peers = 6;
     // Number of cycles to run the simulation
     let cycles = 200;
+
+    println!("Done!");
 
     // Run gossip protocol simulation
     let _ = gossip_protocol_rs::gossip_protocol(
@@ -19,4 +21,5 @@ fn main() {
         num_peers,
         cycles,
     );
+    println!("Done!");
 }

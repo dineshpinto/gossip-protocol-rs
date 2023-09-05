@@ -13,7 +13,12 @@ pub fn gossip_protocol(
     num_peers: usize,
     cycles: usize,
 ) -> Vec<i32> {
+
     // Create nodes
+    println!(
+        "Creating network (num_non_sample={}, num_honest_sample={}, num_adversarial_sample={})...",
+        num_non_sample, num_honest_sample, num_adversarial_sample
+    );
     let mut nodes = create_nodes(
         num_honest_sample,
         num_adversarial_sample,
@@ -21,10 +26,12 @@ pub fn gossip_protocol(
     );
 
     // Connect nodes together
+    println!("Randomly connecting nodes (num_peers={})...", num_peers);
     connect_nodes_to_random_peers(&mut nodes, num_peers);
 
     // Evolve state of the network
-    evolve_state(&mut nodes, cycles)
+    println!("Evolving system...");
+    evolve_state(&mut nodes, cycles, true)
 }
 
 #[pyfunction]
@@ -46,7 +53,7 @@ pub fn run_gossip_protocol(
     connect_nodes_to_random_peers(&mut nodes, num_peers);
 
     // Evolve state of the network
-    evolve_state(&mut nodes, cycles)
+    evolve_state(&mut nodes, cycles, false)
 }
 
 #[pymodule]

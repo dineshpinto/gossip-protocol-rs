@@ -2,6 +2,10 @@ use std::collections::HashMap;
 
 use crate::node::{Message, Node};
 
+fn average(numbers: &[i32]) -> f32 {
+    numbers.iter().sum::<i32>() as f32 / numbers.len() as f32
+}
+
 /// Evolves the state of the nodes by running the gossip protocol simulation
 /// # Arguments
 /// * `nodes` - A list of nodes
@@ -9,6 +13,7 @@ use crate::node::{Message, Node};
 pub fn evolve_state(
     nodes: &mut HashMap<usize, Node>,
     cycles: usize,
+    print_cycle: bool,
 ) -> Vec<i32> {
     let mut non_sample_broadcasts = Vec::new();
 
@@ -16,7 +21,7 @@ pub fn evolve_state(
     let mut _non_sample_broadcasts: Vec<i32> = Vec::new();
 
     // Run simulation
-    for _cycle in 0..cycles {
+    for cycle in 0..cycles {
         // Create a message queue to store messages corresponding to each node
         // Record broadcast messages from non-sample nodes
 
@@ -24,11 +29,16 @@ pub fn evolve_state(
         for node in &mut nodes.values() {
             let msg = node.broadcast();
 
+            // Skip default messages
+            if msg == Message::Default {
+                continue;
+            }
+
             for node_id in &node.peers {
                 _message_queue
                     .entry(*node_id)
                     .or_insert(vec![])
-                    .push(msg);
+                    .push( msg);
             }
 
             // Record the broadcast message from non-sample nodes
@@ -50,8 +60,10 @@ pub fn evolve_state(
         }
 
         non_sample_broadcasts.append(&mut _non_sample_broadcasts);
-        // println!("Cycle {}, Average value broadcast: {:?}",
-        //          cycle, non_sample_broadcasts.last().unwrap());
+        if print_cycle {
+            println!("Cycle {}, Average value broadcast: {:?}",
+                     cycle, average(&non_sample_broadcasts));
+        }
 
         _message_queue.clear();
         _non_sample_broadcasts.clear();

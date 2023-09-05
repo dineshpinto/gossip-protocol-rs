@@ -4,11 +4,11 @@ use gossip_protocol_rs::node::{connect_nodes_to_random_peers, create_nodes};
 use gossip_protocol_rs::state_transition_function::evolve_state;
 
 fn criterion_benchmark(c: &mut Criterion) {
-    let num_honest_sample = 5;
+    let num_honest_sample = 6;
     let num_adversarial_sample = 4;
-    let num_non_sample = 10;
-    let num_peers = 3;
-    let cycles = 10;
+    let num_non_sample = 1000;
+    let num_peers = 6;
+    let cycles = 200;
 
     // Create nodes benchmark
     c.bench_function(
@@ -53,6 +53,7 @@ fn criterion_benchmark(c: &mut Criterion) {
             evolve_state(
                 black_box(&mut nodes),
                 black_box(cycles),
+                black_box(false),
             )
         ),
     );

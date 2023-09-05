@@ -12,7 +12,7 @@ path = "src/lib.rs"
 
 [[bin]]
 name = "gossip_protocol_rs"
-path = "bin.rs"
+path = "src/bin/bin.rs"
 
 [dependencies]
 rand = "0.8.5"
