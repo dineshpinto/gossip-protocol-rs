@@ -628,7 +628,7 @@ description = ""
 optional = false
 python-versions = "*"
 files = [
-    {file = "gossip_protocol_rs-0.1.0-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:ce0f4e6be0fa663ab84ac313ad85a01e6ca959bdc7587e8dc5e3bbbe05d0f87e"},
+    {file = "gossip_protocol_rs-0.1.0-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:dfab80d0fd8fe3c68b0b36f1b8ff34d5d8215668e03b79b0295b2b564d386fd2"},
 ]
 
 [package.source]
