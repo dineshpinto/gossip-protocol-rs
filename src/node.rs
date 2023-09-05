@@ -1,20 +1,20 @@
-use std::cmp::Ordering;
 use std::collections::HashMap;
 
+use counter::Counter;
 use rand::seq::SliceRandom;
 
 /// A message that can be broadcast by a node
-#[derive(PartialEq, Debug, Clone)]
-pub(crate) enum Message {
-    Honest,
-    Adversarial,
-    Default,
+#[derive(PartialEq, Debug, Clone, Eq, Hash, Ord, PartialOrd, Copy)]
+pub enum Message {
+    Honest = 1,
+    Adversarial = 0,
+    Default = -1,
 }
 
 #[derive(PartialEq, Debug, Clone)]
 pub struct Node {
     node_id: usize,
-    messages: Vec<Message>,
+    msg_counter: Counter<Message>,
     pub(crate) initial_message: Message,
     pub(crate) peers: Vec<usize>,
 }
@@ -26,10 +26,10 @@ impl Node {
     ///
     /// * `node_id` - A unique integer identifier for the node
     /// * `initial_message` - The initial message the node will broadcast
-    pub(crate) fn new(node_id: usize, initial_message: Message) -> Node {
+    pub fn new(node_id: usize, initial_message: Message) -> Node {
         Node {
             node_id,
-            messages: Vec::new(),
+            msg_counter: Counter::new(),
             initial_message,
             peers: Vec::new(),
         }
@@ -38,7 +38,7 @@ impl Node {
     /// Adds a list of peers to the node
     /// # Arguments
     /// * `peer_list` - A list of `node_ids corresponding to the peers of the node
-    pub(crate) fn add_peers(&mut self, peer_list: Vec<usize>) {
+    pub fn add_peers(&mut self, peer_list: Vec<usize>) {
         self.peers = peer_list;
     }
 
@@ -46,33 +46,24 @@ impl Node {
     /// the node has received.
     /// # Arguments
     /// * `messages` - A list of messages to update the node with
-    pub(crate) fn update(&mut self, messages: &mut Vec<Message>) {
+    pub fn update(&mut self, iter: Vec<Message>) {
         if self.initial_message != Message::Default {} else {
-            self.messages.append(messages);
+            self.msg_counter.update(iter);
         }
     }
 
     /// Returns the message the node will broadcast. If the node has an initial message, it will
     /// return that message. Otherwise, it will return the majority message from the messages it
     /// has received from its peers.
-    pub(crate) fn broadcast(&self) -> Message {
+    pub fn broadcast(&self) -> Message {
         return if self.initial_message != Message::Default {
-            self.initial_message.clone()
+            self.initial_message
         } else {
-            let honest_count = self.messages
-                .iter()
-                .filter(|&n| *n == Message::Honest)
-                .count();
-            let adversarial_count = self.messages
-                .iter()
-                .filter(|&n| *n == Message::Adversarial)
-                .count();
-
-            match honest_count.cmp(&adversarial_count) {
-                Ordering::Greater => Message::Honest,
-                Ordering::Less => Message::Adversarial,
-                Ordering::Equal => Message::Default,
-            }
+            self.msg_counter
+                .most_common_ordered()
+                .first()
+                .unwrap_or(&(Message::Default, 0))
+                .0
         };
     }
 }

@@ -2,10 +2,6 @@ use std::collections::HashMap;
 
 use crate::node::{Message, Node};
 
-fn average(numbers: &[i32]) -> f32 {
-    numbers.iter().sum::<i32>() as f32 / numbers.len() as f32
-}
-
 /// Evolves the state of the nodes by running the gossip protocol simulation
 /// # Arguments
 /// * `nodes` - A list of nodes
@@ -15,12 +11,14 @@ pub fn evolve_state(
     cycles: usize,
 ) -> Vec<i32> {
     let mut non_sample_broadcasts = Vec::new();
+
+    let mut _message_queue: HashMap<usize, Vec<Message>> = HashMap::new();
+    let mut _non_sample_broadcasts: Vec<i32> = Vec::new();
+
     // Run simulation
-    for cycle in 0..cycles {
+    for _cycle in 0..cycles {
         // Create a message queue to store messages corresponding to each node
-        let mut _message_queue: HashMap<usize, Vec<Message>> = HashMap::new();
         // Record broadcast messages from non-sample nodes
-        let mut _non_sample_broadcasts: Vec<i32> = Vec::new();
 
         // Collect broadcast messages and store them in the message queue
         for node in &mut nodes.values() {
@@ -30,7 +28,7 @@ pub fn evolve_state(
                 _message_queue
                     .entry(*node_id)
                     .or_insert(vec![])
-                    .push(msg.clone());
+                    .push(msg);
             }
 
             // Record the broadcast message from non-sample nodes
@@ -44,16 +42,19 @@ pub fn evolve_state(
         }
 
         // Update nodes with messages from the message queue
-        for (node_id, messages) in &mut _message_queue {
+        for (node_id, messages) in &_message_queue {
             nodes
                 .get_mut(node_id)
                 .unwrap()
-                .update(messages);
+                .update(messages.clone());
         }
 
         non_sample_broadcasts.append(&mut _non_sample_broadcasts);
         // println!("Cycle {}, Average value broadcast: {:?}",
         //          cycle, non_sample_broadcasts.last().unwrap());
+
+        _message_queue.clear();
+        _non_sample_broadcasts.clear();
     }
     non_sample_broadcasts
 }
