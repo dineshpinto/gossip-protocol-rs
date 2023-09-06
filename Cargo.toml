@@ -16,8 +16,10 @@ path = "src/bin/bin.rs"
 [dependencies]
 rand = "0.8.5"
 pyo3 = { version = "0.19.2", features = ["extension-module"] }
-criterion = { version = "0.5.1", features = ["html_reports"] }
 counter = "0.5.7"
+
+[dev-dependencies]
+criterion = { version = "0.5.1", features = ["html_reports"] }
 
 [[bench]]
 name = "benchmarks"

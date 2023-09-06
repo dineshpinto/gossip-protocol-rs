@@ -14,10 +14,21 @@ cargo run --release
 ## Build Python bindings (optional)
 
 ```bash
-poetry install --with dev --no-root
+poetry install --no-dev --no-root
 poetry run maturin build --release
 poetry add target/wheels/*.whl
 ```
+
+If the package still cannot be imported in Python, add `crate-type = ["cdylib"]` under `[lib]` to `Cargo.toml`, then
+run:
+
+```bash
+poetry remove gossip-protocol-rs
+poetry run maturin build --release
+poetry add target/wheels/*.whl
+```
+
+### Use in Python
 
 ```ipython
 >>> from gossip_protocol_rs import pyrun_gossip_protocol
