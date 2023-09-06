@@ -622,20 +622,6 @@ files = [
 ]
 
 [[package]]
-name = "gossip-protocol-rs"
-version = "0.1.0"
-description = ""
-optional = false
-python-versions = "*"
-files = [
-    {file = "gossip_protocol_rs-0.1.0-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:dfab80d0fd8fe3c68b0b36f1b8ff34d5d8215668e03b79b0295b2b564d386fd2"},
-]
-
-[package.source]
-type = "file"
-url = "target/wheels/gossip_protocol_rs-0.1.0-cp311-cp311-macosx_11_0_arm64.whl"
-
-[[package]]
 name = "idna"
 version = "3.4"
 description = "Internationalized Domain Names in Applications (IDNA)"
@@ -2448,4 +2434,4 @@ test = ["websockets"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "353ceca9bcfe35f2b6ab202b13aa04ffc73098365d78e60de700d9a5244a2235"
+content-hash = "c2e5bf6730aa90984c6f3c60f65e524a22be87f586097b3e1548c524be0488ba"

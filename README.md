@@ -1,3 +1,5 @@
+[![test](https://github.com/dineshpinto/gossip-protocol-rs/actions/workflows/rust.yml/badge.svg)](https://github.com/dineshpinto/gossip-protocol-rs/actions/workflows/rust.yml)
+
 # gossip-protocol-rs
 
 Rust implementation of a synchronous gossip protocol.

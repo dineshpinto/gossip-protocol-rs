@@ -10,7 +10,6 @@ packages = [{ include = "gossip_protocol" }]
 [tool.poetry.dependencies]
 python = "^3.11"
 maturin = "^1.2.3"
-gossip-protocol-rs = {path = "target/wheels/gossip_protocol_rs-0.1.0-cp311-cp311-macosx_11_0_arm64.whl"}
 
 [tool.poetry.group.dev.dependencies]
 jupyterlab = "^4.0.5"
