@@ -14,7 +14,7 @@ cargo run --release
 ## Build Python bindings (optional)
 
 ```bash
-poetry install --no-dev --no-root
+poetry install --no-root
 poetry run maturin build --release
 poetry add target/wheels/*.whl
 ```
