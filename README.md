@@ -13,23 +13,16 @@ cargo run --release
 
 ## Build Python bindings (optional)
 
-Add `crate-type = ["cdylib"]` under `[lib]` to `Cargo.toml` to build as a dynamic library.
-
 ```bash
-poetry install --with dev
+poetry install --with dev --no-root
 poetry run maturin build --release
-```
-
-This will build the Python bindings and place them in `target/wheels` . To install the wheels
-
-```bash
-poetry add target/wheels/<name-of-wheel>.whl
+poetry add target/wheels/*.whl
 ```
 
 ```ipython
 >>> from gossip_protocol_rs import pyrun_gossip_protocol
->>> res = pyrun_gossip_protocol(num_honest_sample=6, num_adversarial_sample=4,
-    num_non_sample=10000, num_peers=6, cycles=100)
+>>> res = pyrun_gossip_protocol(num_honest_sample=300, num_adversarial_sample=200,
+    num_non_sample=10000, num_peers=8, cycles=50)
 ```
 
 ## Simulation
