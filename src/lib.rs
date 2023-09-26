@@ -59,3 +59,14 @@ fn gossip_protocol_rs(_py: Python<'_>, m: &PyModule) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(pyrun_gossip_protocol, m)?)?;
     Ok(())
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn gossip_protocol() {
+        let states = run_gossip_protocol(6, 4, 100, 6, 50, false);
+        assert_eq!(states.len(), 100*50)
+    }
+}

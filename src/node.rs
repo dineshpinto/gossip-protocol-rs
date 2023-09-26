@@ -115,3 +115,22 @@ pub fn connect_nodes_to_random_peers(
         node.add_peers(peers);
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_create_nodes() {
+        let nodes = create_nodes(6, 4, 100);
+        assert_eq!(nodes.get(&1).unwrap().initial_message, Message::Honest);
+        assert_eq!(nodes.get(&(nodes.len() - 1)).unwrap().initial_message, Message::Default);
+    }
+
+    #[test]
+    fn test_connect_nodes_to_random_peers() {
+        let mut nodes = create_nodes(6, 4, 100);
+        connect_nodes_to_random_peers(&mut nodes, 7);
+        assert_eq!(nodes.get(&0).unwrap().peers.len(), 7);
+    }
+}

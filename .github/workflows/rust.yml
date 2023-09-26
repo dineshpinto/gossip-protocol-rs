@@ -24,15 +24,3 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           fail_ci_if_error: true
-      - name: Set up Python 3.11
-        uses: actions/setup-python@v4
-        with:
-          python-version: 3.11
-      - name: Set up poetry
-        uses: Gr1N/setup-poetry@v8
-      - name: Install Python dependencies
-        run: poetry install --no-dev --no-root
-      - name: Build wheel with maturin
-        run: poetry run maturin build
-      - name: Install wheel
-        run: poetry add target/wheels/*.whl

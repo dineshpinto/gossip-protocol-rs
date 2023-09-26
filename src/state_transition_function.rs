@@ -72,3 +72,17 @@ pub fn evolve_state(
     }
     non_sample_broadcasts
 }
+
+#[cfg(test)]
+mod tests {
+    use crate::node::create_nodes;
+    use super::*;
+
+    #[test]
+    fn test_evolve_state() {
+        let mut nodes = create_nodes(6, 1, 100);
+        let non_sample_broadcasts = evolve_state(&mut nodes, 100, 10, false);
+        assert_eq!(non_sample_broadcasts.len(), 10000);
+        assert_eq!(non_sample_broadcasts[non_sample_broadcasts.len() - 1], 1);
+    }
+}
