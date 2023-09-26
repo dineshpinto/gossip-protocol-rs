@@ -76,6 +76,7 @@ pub fn evolve_state(
 #[cfg(test)]
 mod tests {
     use crate::node::create_nodes;
+
     use super::*;
 
     #[test]

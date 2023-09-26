@@ -66,7 +66,7 @@ mod tests {
 
     #[test]
     fn gossip_protocol() {
-        let states = run_gossip_protocol(6, 4, 100, 6, 50, false);
-        assert_eq!(states.len(), 100*50)
+        let states = run_gossip_protocol(6, 4, 100, 6, 50, true);
+        assert_eq!(states.len(), 100 * 50)
     }
 }
