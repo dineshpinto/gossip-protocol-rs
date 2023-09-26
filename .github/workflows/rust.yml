@@ -13,13 +13,20 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v3
+      - uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: nightly
       - name: Build with cargo
         run: cargo build --verbose
-      - name: Run cargo tests
-        run: cargo test --verbose
+      - name: Run tests
+        run: cargo tarpaulin
+      - name: Upload to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          fail_ci_if_error: true
       - name: Set up Python 3.11
         uses: actions/setup-python@v4
         with:
