@@ -2,7 +2,7 @@
 [![codecov](https://codecov.io/gh/dineshpinto/gossip-protocol-rs/graph/badge.svg?token=DRI0SYP28V)](https://codecov.io/gh/dineshpinto/gossip-protocol-rs)
 # gossip-protocol-rs
 
-Rust implementation of a synchronous gossip protocol.
+A blazingly-fast implementation of a synchronous gossip protocol in Rust with PyO3 Python bindings.
 
 ## Build Rust library
 
@@ -11,7 +11,7 @@ cargo build --release
 cargo run --release
 ```
 
-## Build Python bindings (optional)
+## Build Python bindings (optional, for data analytics)
 
 Add `crate-type = ["cdylib"]` under `[lib]` to `Cargo.toml`, then:
 
@@ -21,12 +21,12 @@ poetry run maturin build --release
 poetry add target/wheels/*.whl
 ```
 
-### Use in Python
+### Call the Rust functions from Python
 
 ```ipython
 >>> from gossip_protocol_rs import pyrun_gossip_protocol
->>> res = pyrun_gossip_protocol(num_honest_sample=300, num_adversarial_sample=200,
-    num_non_sample=10000, num_peers=8, cycles=50)
+>>> res = pyrun_gossip_protocol(num_honest_sample=3000, num_adversarial_sample=2000,
+    num_non_sample=100000, num_peers=8, cycles=50)
 ```
 
 ## Simulation
