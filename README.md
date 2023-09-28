@@ -46,6 +46,14 @@ Uses `criterion` to benchmark the library.
 cargo bench
 ```
 
+| Param           | Value |
+|-----------------|-------|
+| num_non_sample  | 1000  |
+| num_honest      | 6     | 
+| num_adversarial | 4     |
+| num_peers       | 6     |
+| cycles          | 200   |
+
 ![create_nodes_pdf](output/benchmark_create_nodes_pdf.svg)
 ![connect_nodes_to_random_peers_pdf](output/benchmark_connect_nodes_to_random_peers_pdf.svg)
 ![evolve_state_pdf](output/benchmark_evolve_state_pdf.svg)
